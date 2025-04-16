@@ -1,12 +1,13 @@
 import express from "express"
-import { googleLogin } from "../controllers/userController.js";
+import { register, login } from "../controllers/userController.js";
 const userRoute=express.Router();
 
 userRoute.get('/',(req,res)=>{
     res.send("app in running");
 
 })
-userRoute.post('/google-login', googleLogin);
+userRoute.post('/register', register);
+userRoute.post('/login', login);
 
 
 
