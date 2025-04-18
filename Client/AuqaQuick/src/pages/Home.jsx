@@ -3,7 +3,7 @@ import bottle from '../../public/bottlebg.png';
 import truck from '../../public/truck.png';
 import login from '../../public/login.png';
 import bottleicon from '../../public/bottle.png';
-
+import { Link } from'react-router-dom';
 function Home() {
   return (
     <div className="min-h-screen bg-blue-50">
@@ -16,8 +16,8 @@ function Home() {
           <p className="mt-4 text-gray-600 text-lg md:text-xl">
             Order 20-liter water bottles online quickly and easily
           </p>
-          <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow font-bold">
-            Order 20L Bottle
+          <button className="mt-10 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl shadow font-bold">
+            <Link to="/login">Order 20L Bottle</Link>
           </button>
         </div>
         <div className="md:w-1/2">
