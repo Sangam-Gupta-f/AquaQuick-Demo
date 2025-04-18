@@ -8,6 +8,7 @@ import { Routes, Route } from'react-router-dom'
 import Register from './pages/Register'
 import Bookorder from './pages/Bookorder'
 import Footer from './pages/Footer'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -16,9 +17,18 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
+      
+        <Route path='/dashboard' element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }/>
         <Route path='/register' element={<Register/>}/>
-        <Route path='/orders' element={<Bookorder/>}/>
+        <Route path='/orders' element={
+          <ProtectedRoute>
+            <Bookorder />
+          </ProtectedRoute>
+        }/>
       </Routes>
       <Footer/>
     </div>
