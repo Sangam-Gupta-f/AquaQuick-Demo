@@ -17,7 +17,7 @@ function Register() {
     e.preventDefault();
     // Add API call to register user here
     try {
-      const response = await fetch('http://localhost:3000/api/users/register', {
+      const response = await fetch('https://aquaquick-backend.onrender.com/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
