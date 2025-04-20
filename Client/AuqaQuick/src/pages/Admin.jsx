@@ -3,12 +3,27 @@ import { useState, useEffect } from 'react';
 function Admin() {
     const [users, setUsers] = useState([]);
   const adminName=JSON.parse(localStorage.getItem('user'));
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const response = await fetch('https://aquaquick-backend.onrender.com/api/orders/getAllOrders');
-            const data = await response.json();
-            setUsers(data);
-        };
+
+  const updateStatusHandler = async (orderId, newStatus) => {
+    const response = await fetch(`https://aquaquick-backend.onrender.com/api/orders/update/${orderId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus})
+    });
+    if(response.ok) {
+        fetchUsers();
+    }
+  }
+
+  const fetchUsers = async () => {
+    const response = await fetch('https://aquaquick-backend.onrender.com/api/orders/getAllOrders');
+    const data = await response.json();
+    const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    setUsers(sortedData);
+};
+
+
+    useEffect(() => {  
         fetchUsers();
     }, []);
 
@@ -25,12 +40,24 @@ function Admin() {
                 </tr>
             </thead>
             <tbody className=''>
-                {users.map((user,index) => (
+                {users.map((order,index) => (
                 <tr key={index} className='text-center '>
-                    <td className="p-2">{user.user?.name}</td>
-                    <td className="p-2">{user.bottleQuantity}</td>
-                    <td className="p-2">{user.user?.phone}</td>
-                    <td className="p-2 "><button className='rounded bg-yellow-100 p-2 font-bold border' >{user.status}</button></td>
+                    <td className="p-2">{order.user?.name}</td>
+                    <td className="p-2">{order.bottleQuantity}</td>
+                    <td className="p-2">{order.user?.phone}</td>
+                    <td className="p-2 ">
+                    <select
+                      value={order.status}
+                       onChange={(e) => updateStatusHandler(order._id, e.target.value)}
+                      className={`px-3 py-1 rounded border font-medium ${
+                       order.status === 'Delivered' ? 'bg-green-100 text-green-700': order.status === 'Pending'? 'bg-yellow-100 text-yellow-700': 'bg-gray-100 text-gray-700'
+                          }`}
+                           >
+                        <option value="pending">Pending</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="dispatched">Dispatched</option>
+                    </select>
+                    </td>
                 </tr>
             ))}   
             </tbody>
