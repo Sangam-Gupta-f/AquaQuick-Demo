@@ -9,7 +9,7 @@ import Register from './pages/Register'
 import Bookorder from './pages/Bookorder'
 import Footer from './pages/Footer'
 import ProtectedRoute from './components/ProtectedRoute'
-
+import Admin from './pages/Admin'
 function App() {
   return (
     <div className=''>
@@ -27,6 +27,11 @@ function App() {
         <Route path='/orders' element={
           <ProtectedRoute>
             <Bookorder />
+          </ProtectedRoute>
+        }/>
+        <Route path='/admin' element={
+          <ProtectedRoute>
+            <Admin />
           </ProtectedRoute>
         }/>
       </Routes>
