@@ -1,13 +1,14 @@
 import React from 'react'
 import bottle from "../../public/bottlebg.png"
 import { useState } from'react';
-
+import { useNavigate } from'react-router-dom';
 function Bookorder() {
   const [formData, setFormData] = useState({  bottleQuantity: ''});
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({...formData, bottleQuantity: parseInt(e.target.value) });
@@ -34,6 +35,9 @@ function Bookorder() {
       }else{
         setError('');
         setSuccess('Order Placed successfully');
+        setTimeout(() => {
+          navigate('/dashboard' , { replace: true });
+        }, 2000);
       }
     } catch (error) {
       setError(` ${error} 'An error occurred while logging in'`);
