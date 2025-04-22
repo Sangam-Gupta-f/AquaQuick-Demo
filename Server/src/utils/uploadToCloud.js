@@ -3,9 +3,9 @@ import fs from 'fs';
 console.log('Cloudinary Env Vars:', process.env.CLOUD_NAME, process.env.API_KEY, process.env.API_SECRET);
 
 cloudinary.config({
-    cloud_name:"do021cjp7",
-    api_key:"558962364734443",
-    api_secret:"vVSXUWHuUPuqs4buCRHb5jspk70"
+    cloud_name:process.env.CLOUD_NAME,
+    api_key:process.env.API_KEY,
+    api_secret:process.env.API_SECRET
 })
 
 
