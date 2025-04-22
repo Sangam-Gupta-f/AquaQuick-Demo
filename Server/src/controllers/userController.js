@@ -1,15 +1,23 @@
 import { User } from "../models/UserModel.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import uploadToCloud from "../utils/uploadToCloud.js";
 
 const register=async(req,res)=>{
   const {name, email, password, phone, role}=req.body;
   try {
     const exist=await User.findOne({email});
     if(exist)return res.status(400).json({ message: 'Email already registered' });
+    const avatarLocalFilePath=req.files?.avatar[0]?.path;
+    if(!avatarLocalFilePath) return res.status(400).json({ message: 'Please upload an avatar' });
+    console.log('Uploading avatar at localfile--', avatarLocalFilePath);
+    const avatar=await uploadToCloud(avatarLocalFilePath);
+    console.log('Uploading avatar to cloudinary', avatar); ///CLoudinary API integration
+    console.log(avatar.url);
+
 
     const hashPassword=await bcrypt.hash(password,10);
-  const newUser=await  User.create({name, email, password : hashPassword, phone, role});
+  const newUser=await  User.create({name, email, password : hashPassword, phone, role,avatar:avatar.url });
 
   const token= jwt.sign({id:newUser._id, email: newUser.email, role: newUser.role}, process.env.SECRET_KEY,{ expiresIn: '7d' }
   )
