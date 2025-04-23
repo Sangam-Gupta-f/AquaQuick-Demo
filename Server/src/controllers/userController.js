@@ -51,6 +51,31 @@ const login=async(req,res)=>{
   }
 }
 
-  
+const updatePassword=async(req,res)=>{
+  const [email]=req.body;
+  try {
+    const user=await User.findOne({email});
+    if(!user)return res.status(400).json({ message: 'User not exist' });
+    const newPassword=req.body.password;
+    const hashPassword=await bcrypt.hash(newPassword,10);
+    await User.updateOne({email}, {password:hashPassword});
+    res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+    res.status(500).json({ error: error.message });
+    }
+}
+ const generateOTP=async(req,res)=>{
+  const {email}=req.body;
+  try {
+    const user=await User.findOne({email});
+    if(!user)return res.status(400).json({ message: 'User not exist' });
+    const otp=Math.floor(100000 + Math.random() * 900000);
+    await User.updateOne({email}, {otp});
+    //send OTP to user email
+    res.status(200).json({ message: 'OTP sent successfully' });
+    } catch (error) {
+    res.status(500).json({ error: error.message });
+    }
+}  
 
 export {register, login};  

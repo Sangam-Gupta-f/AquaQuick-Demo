@@ -1,6 +1,8 @@
 import {v2 as cloudinary} from 'cloudinary';
 import fs from 'fs';
-console.log('Cloudinary Env Vars:', process.env.CLOUD_NAME, process.env.API_KEY, process.env.API_SECRET);
+import dotenv from 'dotenv';
+dotenv.config();
+//console.log('Cloudinary Env Vars:', process.env.CLOUD_NAME, process.env.API_KEY, process.env.API_SECRET);
 
 cloudinary.config({
     cloud_name:process.env.CLOUD_NAME,
