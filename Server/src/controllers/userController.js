@@ -2,6 +2,8 @@ import { User } from "../models/UserModel.js";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import uploadToCloud from "../utils/uploadToCloud.js";
+import { sendOTPEmail } from "../utils/sendMail.js";
+
 
 const register=async(req,res)=>{
   const {name, email, password, phone, role}=req.body;
@@ -51,31 +53,43 @@ const login=async(req,res)=>{
   }
 }
 
-const updatePassword=async(req,res)=>{
-  const [email]=req.body;
-  try {
-    const user=await User.findOne({email});
-    if(!user)return res.status(400).json({ message: 'User not exist' });
-    const newPassword=req.body.password;
-    const hashPassword=await bcrypt.hash(newPassword,10);
-    await User.updateOne({email}, {password:hashPassword});
-    res.status(200).json({ message: 'Password updated successfully' });
-    } catch (error) {
-    res.status(500).json({ error: error.message });
-    }
-}
- const generateOTP=async(req,res)=>{
+const generateOTP=async(req,res)=>{
   const {email}=req.body;
   try {
     const user=await User.findOne({email});
     if(!user)return res.status(400).json({ message: 'User not exist' });
     const otp=Math.floor(100000 + Math.random() * 900000);
-    await User.updateOne({email}, {otp});
+    const otpExpiry = Date.now() + 5 * 60 * 1000; // 5 min
+
+    user.otp = otp;
+    user.otpExpiry = otpExpiry;
+    await user.save();
     //send OTP to user email
+    await sendOTPEmail(email, otp);
     res.status(200).json({ message: 'OTP sent successfully' });
     } catch (error) {
     res.status(500).json({ error: error.message });
     }
 }  
 
-export {register, login};  
+// POST /api/users/reset-password
+ const resetPassword = async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user || user.otp !== otp || Date.now() > user.otpExpiry) {
+    return res.status(400).json({ message: 'Invalid or expired OTP' });
+  }
+
+  const hashPassword = await bcrypt.hash(newPassword, 10);
+  user.password = hashPassword; // hash password
+  user.otp = undefined;
+  user.otpExpiry = undefined;
+  await user.save();
+
+  res.status(200).json({ message: 'Password updated successfully' });
+};
+
+
+
+export {register, login, resetPassword, generateOTP};  
