@@ -1,10 +1,21 @@
 import { Order } from "../models/OrderModel.js";
+ import { sendOTPEmail } from "../utils/sendMail.js";
 import { User } from "../models/UserModel.js";
 //Create order
 const createOrder=async (req, res)=>{
+  const { user,bottleQuantity } = req.body;
    try {
-    const order = new Order(req.body);
+    const order = new Order({user,bottleQuantity} );
     const saved = await order.save();
+    const userData = await User.findById(req.body.user);
+    if (userData?.email) {
+      await sendOTPEmail(
+        userData.email,
+        'Order Confirmation - AquaQuick 💧',
+        `Hi ${userData.name},\n\nYour order for ${bottleQuantity} bottle(s) has been placed successfully. 🚚💦\n\nThank you for choosing AquaQuick!`
+      );
+      console.log('Order confirmation email sent ✅');
+    }
     res.status(201).json(saved);
    } catch (error) {
      res.status(400).json({err:error.message});

@@ -64,8 +64,10 @@ const generateOTP=async(req,res)=>{
     user.otp = otp;
     user.otpExpiry = otpExpiry;
     await user.save();
+    const subject='Your AquaQuick OTP Code';  //email subject
+    const text=`Your OTP code is: ${otp}. It will expire in 5 minutes.`; //email body
     //send OTP to user email
-    await sendOTPEmail(email, otp);
+    await sendOTPEmail(email, subject,text);
     res.status(200).json({ message: 'OTP sent successfully' });
     } catch (error) {
     res.status(500).json({ error: error.message });

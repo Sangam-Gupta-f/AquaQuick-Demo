@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
 dotenv.config();
-export const sendOTPEmail = async (email, otp) => {
+export const sendOTPEmail = async (email, subject, text) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail', // or use Mailtrap/sendgrid in prod
     auth: {
@@ -12,10 +12,10 @@ export const sendOTPEmail = async (email, otp) => {
   });
 
   const mailOptions = {
-    from: '"AquaQuick" <your-email@gmail.com>',
+    from: process.env.MAIL_USER,
     to: email,
-    subject: 'Your AquaQuick OTP Code',
-    text: `Your OTP code is: ${otp}. It will expire in 5 minutes.`
+    subject: subject,
+    text: text 
   };
 
   await transporter.sendMail(mailOptions);
