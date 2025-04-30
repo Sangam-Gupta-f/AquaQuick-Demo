@@ -92,6 +92,15 @@ const generateOTP=async(req,res)=>{
   res.status(200).json({ message: 'Password updated successfully' });
 };
 
+const getAllUsers=async (req, res)=>{
+  try {
+     const users = await User.find().sort({createdAt:-1});
+     res.json(users);
+    } catch (error) {
+      res.status(400).json({err:error.message});
+    }
+ }
 
 
-export {register, login, resetPassword, generateOTP};  
+
+export {register, login, resetPassword, generateOTP, getAllUsers};  

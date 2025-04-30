@@ -1,5 +1,5 @@
 import express from "express"
-import { register, login , generateOTP, resetPassword} from "../controllers/userController.js";
+import { register, login , generateOTP, resetPassword, getAllUsers} from "../controllers/userController.js";
 import {upload } from "../middlewares/multer.middleware.js";
 
 const userRoute=express.Router();
@@ -16,6 +16,7 @@ userRoute.post('/login', login);
 userRoute.post('/generateOtp', generateOTP);
 
 userRoute.post('/resetPassword', resetPassword);
+userRoute.get('/getAllUsers', getAllUsers);
 
 
 
