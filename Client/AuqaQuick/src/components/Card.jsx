@@ -1,15 +1,23 @@
 import React from 'react'
 
-function Card({user}) {
+function Card({ user }) {
   return (
-    <div className=' md:flex md:justify-around  justify-between items-center border-4 rounded mt-2 mb-2 border-blue-100'>
-      <div className='flex justify-center items-center'>
-        <img className='w-24 h-24 rounded-full object-cover mb-4 border-4 border-indigo-500'src={user.avatar} alt="pic" />
+    <div className="shadow-md bg-blue-100 rounded-lg p-4 flex flex-col md:flex-row items-center justify-between gap-4 w-full max-w-4xl mx-auto mt-4">
+      
+      {/* Avatar */}
+      <div className="flex-shrink-0">
+        <img
+          className="w-24 h-24 rounded-full object-cover border-4 border-indigo-500"
+          src={user.avatar}
+          alt="User avatar"
+        />
       </div>
-      <div className='flex flex-col justify-center items-center'>
-            <h3 className="text-2xl font-semibold text-gray-800">{user?.name}</h3>
-            <p className="text-xl text-gray-600">{user?.email}</p>
-            <p className="text-xl text-gray-500 capitalize">{user?.role}</p>
+
+      {/* User Info */}
+      <div className="flex flex-col items-center md:items-start text-center md:text-right">
+        <h3 className="text-2xl font-semibold text-gray-800 md:text-right">{user?.name}</h3>
+        <p className="text-xl text-gray-600 md:text-right">{user?.email}</p>
+        <p className="text-xl text-gray-500 capitalize md:text-right">{user?.role}</p>
       </div>
     </div>
   )
