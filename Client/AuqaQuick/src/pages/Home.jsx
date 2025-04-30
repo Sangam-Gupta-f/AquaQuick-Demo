@@ -9,7 +9,7 @@ function Home() {
     <div className="min-h-screen bg-blue-50">
       {/* Hero Section */}
       <section className="flex flex-col-reverse md:flex-row items-center text-center md:text-left px-6 py-10 gap-10 md:gap-0 justify-around">
-        <div className="md:w-1/2">
+        <div className="">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
             Get Fresh Water Delivered
           </h1>

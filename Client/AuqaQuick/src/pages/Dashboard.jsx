@@ -6,7 +6,7 @@ function Dashboard() {
   const data=JSON.parse(localStorage.getItem('user'));
   console.log(data);
 if(data.role==='admin'){
-  return <Navigate to='/admin' replace />;
+  return <Navigate to='/adminDash' replace />;
 }
   return (
     <div className='min-h-screen bg-blue-50 p-6'>

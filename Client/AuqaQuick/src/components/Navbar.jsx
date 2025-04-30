@@ -18,7 +18,7 @@ function Navbar() {
             <Link to='/' className='hover:underline'>Home</Link>
             {user ? (
           <>
-            <Link to={user.role === 'admin' ? '/admin' : '/dashboard'}>Dashboard</Link>
+            <Link to={user.role === 'admin' ? '/adminDash' : '/dashboard'}>Dashboard</Link>
             <button onClick={handleLogout} className="bg-red-500 px-3 py-1 rounded ml-2">Logout</button>
           </>
         ) : (
