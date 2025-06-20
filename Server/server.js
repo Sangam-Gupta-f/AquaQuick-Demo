@@ -23,7 +23,7 @@ mongoose.connect(`${process.env.MONGO_URI}AquaQuick`, {
     console.log("mongo connected successfully");
 })
 .catch((err)=>{
- console.log(err)
+ console.log(err, "mongo connection failed");
 })
 
 
