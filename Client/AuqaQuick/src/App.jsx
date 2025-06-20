@@ -13,6 +13,7 @@ import Admin from './pages/Admin'
 import AdminDashBoard from './pages/AdminDashBoard'
 import GetAllUsers from './components/GetAllUsers'
 import AdminOrderList from './components/AdminOrderList'
+import ResetPassword from './pages/ResetPassword'
 function App() {
   return (
     <div >
@@ -27,6 +28,7 @@ function App() {
           </ProtectedRoute>
         }/>
         <Route path='/register' element={<Register/>}/>
+        <Route path='/resetpassword' element={<ResetPassword/>}/>
         <Route path='/allusers' element={<GetAllUsers/>}/>
         <Route path='/allorders' element={<AdminOrderList/>}/>
         <Route path='/orders' element={

@@ -101,6 +101,12 @@ function Login() {
               Register
             </Link>
           </p>
+          <p className="mt-4 text-sm text-gray-600">
+            Forgot password?
+            <Link to='/resetpassword' className="text-blue-700 hover:underline">
+              Reset Password
+            </Link>
+          </p>
         </div>
       </div>
     </div>
