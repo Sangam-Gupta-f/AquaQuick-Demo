@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from "react-router"
 import { useNavigate } from 'react-router'
-import Toggler from './toggler';
+import Toggler from './Toggler';
 function Navbar() {
   const navigate=useNavigate();
 
