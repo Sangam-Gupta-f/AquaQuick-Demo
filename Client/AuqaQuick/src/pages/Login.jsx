@@ -49,7 +49,7 @@ function Login() {
     setFormData({ email: '', password: '' });
   };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-blue-50 dark:bg-gray-600 px-4">
       <div className="flex flex-col md:flex-row bg-white shadow-2xl rounded-2xl overflow-hidden w-full max-w-4xl">
         {/* Left Image Section */}
         <div className="md:w-1/2 bg-blue-100 p-4 flex items-center justify-center">

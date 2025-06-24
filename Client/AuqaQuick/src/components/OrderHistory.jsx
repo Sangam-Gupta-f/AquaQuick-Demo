@@ -21,19 +21,19 @@ function OrderHistroy() {
  }, []); 
   
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Order History</h2>
-      <table className='w-full table-auto  '>
+    <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4 text-center">Order History</h2>
+      <table className='w-full table-auto text-center '>
         <thead>
-          <tr className="bg-blue-100 text-blue-900">
-            <th className="px-4 py-2 text-left">Date</th>
-            <th className="px-4 py-2 text-left">Bottle Quantity</th>
-            <th className="px-4 py-2 text-left">Status</th>
+          <tr className="bg-blue-100 text-blue-900 ">
+            <th className="px-4 py-2 ">Date</th>
+            <th className="px-4 py-2 ">Bottle Quantity</th>
+            <th className="px-4 py-2 ">Status</th>
           </tr>
         </thead>
         <tbody>
           {history.map((order, index) => (
-            <tr key={index}>
+            <tr key={index} className="border-b border-gray-200 dark:border-gray-600 text-gray-800 dark:text-white">
               <td className="px-4 py-2">{new Date(order.createdAt).toLocaleDateString()}</td>
               <td className="px-4 py-2">{order.bottleQuantity}</td>
               <td className="px-4 py-2">{order.status}</td>

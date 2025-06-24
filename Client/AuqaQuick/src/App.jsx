@@ -14,8 +14,10 @@ import AdminDashBoard from './pages/AdminDashBoard'
 import GetAllUsers from './components/GetAllUsers'
 import AdminOrderList from './components/AdminOrderList'
 import ResetPassword from './pages/ResetPassword'
+import { ThemeContextProvider } from './context/ThemeContect'
 function App() {
   return (
+    <ThemeContextProvider>
     <div >
       <Navbar/>
       <Routes>
@@ -44,6 +46,7 @@ function App() {
       </Routes>
       <Footer/>
     </div>
+    </ThemeContextProvider>
   )
 }
 

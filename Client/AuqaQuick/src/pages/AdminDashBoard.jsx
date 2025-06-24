@@ -33,12 +33,12 @@ const handleNavigation = (component) => {
   setUpdateContent(component);
 };
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 drak:bg-gray-700">
         {/* Sidebar */}
-        <div className={`bg-indigo-800 text-white transition-all duration-300 ease-in-out flex flex-col
+        <div className={`bg-indigo-800 drak:bg-gray-700 text-white transition-all duration-300 ease-in-out flex flex-col
           ${isSideBarOpen ? 'w-64' : 'w-20'} fixed md:relative h-full z-10`}>
           
-          <div className="flex items-center justify-between p-4 border-b border-indigo-700">
+          <div className="flex items-center justify-between p-4 border-b border-indigo-700 drak:bg-gray-700">
             {isSideBarOpen && (
               <h1 className="text-xl font-bold whitespace-nowrap">Admin</h1>
             )}
@@ -51,7 +51,7 @@ const handleNavigation = (component) => {
             </button>
           </div>
           
-          <nav className="flex-1 overflow-y-auto">
+          <nav className="flex-1 overflow-y-auto drak:bg-gray-700">
             {routes.map((route, index) => (
               <NavItem 
                 key={index}
@@ -66,8 +66,8 @@ const handleNavigation = (component) => {
         </div>
         
         {/* Main Content */}
-        <div className={`flex-1 overflow-auto transition-all duration-300 ${isSideBarOpen ? 'ml-15 md:ml-10' : 'ml-15 md:ml-10'}`}>
-          <div className="p-4 md:p-8">
+        <div className={` flex-1 overflow-auto transition-all duration-300 bg-blue-50 dark:bg-gray-600`}>
+          <div className="p-4 md:p-8 bg-blue-50 dark:bg-gray-600 ">
             {updateContent}
           </div>
         </div>

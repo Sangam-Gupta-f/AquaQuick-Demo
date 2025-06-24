@@ -28,9 +28,9 @@ function AdminOrderList() {
     }, []);
 
   return (
-    <div className='min-h-screen flex flex-col rounded border-2 bg-blue-100'>
-        <h1 className='text-3xl font-bold text-center p-4'>Walcome {adminName.name}</h1>
-        <table className='w-full table-auto  rounded-2xl p-6'>
+    <div className='min-h-screen flex flex-col rounded border-2 bg-blue-100 dark:bg-gray-700 '>
+        <h1 className='text-3xl font-bold text-center p-4 dark:text-white'>Walcome {adminName.name}</h1>
+        <table className='w-full table-auto  dark:text-white rounded-2xl p-6'>
             <thead className='bg-blue-300 '>
                 <tr>
                     <th className="p-2">User Name</th>
@@ -53,9 +53,9 @@ function AdminOrderList() {
                        order.status === 'Delivered' ? 'bg-green-100 text-green-700': order.status === 'Pending'? 'bg-yellow-100 text-yellow-700': 'bg-gray-100 text-gray-700'
                           }`}
                            >
-                        <option value="Pending">Pending</option>
-                        <option value="Delivered">Delivered</option>
-                        <option value="Dispatched">Dispatched</option>
+                        <option value="pending">Pending</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="dispatched">Dispatched</option>
                     </select>
                     </td>
                 </tr>
