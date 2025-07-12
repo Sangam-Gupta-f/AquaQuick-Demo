@@ -10,7 +10,7 @@ function OrderHistroy() {
     try {
       const user=JSON.parse(localStorage.getItem('user'));
       //console.log(user._id);
-      const response = await fetch(`https://aquaquick-backend.onrender.com/api/orders/getUserOrders/${user._id}`)
+      const response = await fetch(`http://localhost:3000/api/orders/getUserOrders/${user._id}`)
     const data = await response.json();
     setHistory(data)
     } catch (error) {

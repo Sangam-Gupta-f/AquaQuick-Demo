@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault();
     // TODO: Send login request to server
     try {
-      const response = await fetch('https://aquaquick-backend.onrender.com/api/users/login', {
+      const response = await fetch('http://localhost:3000/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

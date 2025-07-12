@@ -5,7 +5,7 @@ function AdminOrderList() {
   const adminName=JSON.parse(localStorage.getItem('user'));
 
   const updateStatusHandler = async (orderId, newStatus) => {
-    const response = await fetch(`https://aquaquick-backend.onrender.com/api/orders/update/${orderId}`, {
+    const response = await fetch(`http://localhost:3000/api/orders/update/${orderId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus})
@@ -16,7 +16,7 @@ function AdminOrderList() {
   }
 
   const fetchUsers = async () => {
-    const response = await fetch('https://aquaquick-backend.onrender.com/api/orders/getAllOrders');
+    const response = await fetch('http://localhost:3000/api/orders/getAllOrders');
     const data = await response.json();
     const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     setUsers(sortedData);

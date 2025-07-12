@@ -3,7 +3,8 @@ import bottle from '../../public/bottlebg.png';
 import { useState } from'react';
 import { useNavigate } from 'react-router-dom';
 function Register() {
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', password: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', password: ''});
+  const [avatar, setAvatar] = useState(null);
   const [errors, setErrors] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -12,15 +13,25 @@ function Register() {
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value });
   }
+  const handleFileChange = (e) => {
+    setAvatar(e.target.files[0]);
+  }
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     // Add API call to register user here
     try {
-      const response = await fetch('https://aquaquick-backend.onrender.com/api/users/register', {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('password', formData.password);
+      if (avatar) {
+        formDataToSend.append('avatar', avatar);
+      }
+      const response = await fetch('http://localhost:3000/api/users/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: formDataToSend,
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -101,6 +112,15 @@ function Register() {
                 value={formData.password}
                 type="password"
                 placeholder="••••••••"
+                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+           <div>
+              <label htmlFor="avatar" className="text-gray-700 font-medium">Avatar</label>
+              <input
+                name="avatar"
+                onChange={handleFileChange}
+                type="file"
                 className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

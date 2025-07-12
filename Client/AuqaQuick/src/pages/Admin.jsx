@@ -7,7 +7,7 @@ function Admin() {
   const [summary, setSummary] = useState({ total: 0, pending: 0, delivered: 0 });
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await fetch('https://aquaquick-backend.onrender.com/api/orders/getAllOrders');
+      const response = await fetch('http://localhost:3000/api/orders/getAllOrders');
       const data = await response.json();
 
       // Calculate summary

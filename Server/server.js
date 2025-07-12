@@ -15,10 +15,7 @@ app.use(cors());
 app.use('/api/users', userRoute);
 app.use('/api/orders', orderRoute);
 
-mongoose.connect(`${process.env.MONGO_URI}AquaQuick`, {
-    useNewUrlParser:true,
-    useUnifiedTopology:true
-})
+mongoose.connect(`${process.env.MONGO_URI}test-AquaQuick`)
 .then(()=>{
     console.log("mongo connected successfully");
 })
@@ -28,5 +25,5 @@ mongoose.connect(`${process.env.MONGO_URI}AquaQuick`, {
 
 
 app.listen(3000, (req,res)=>{
-    console.log("app is runnig")
+    console.log("app is running on port 3000");
 })
